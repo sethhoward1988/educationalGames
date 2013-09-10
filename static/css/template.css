@@ -1,0 +1,67 @@
+body {
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 20px;
+}
+
+.jumbotron {
+	font-family: 'Walter Turncoat', cursive;
+}
+
+h1, h2, h3, h4, h5 ,h6 {
+	font-family: 'Walter Turncoat', cursive;
+}
+
+.footer {
+	background-color: #eee;
+}
+
+.footer .container {
+	text-align: center;
+	font-size: 14px;
+}
+
+.jumbotron h1 .pull-right {
+	font-size: 18px;
+}
+
+.navbar {
+    border-radius: 0px;
+    margin-bottom: 0px;
+}
+
+.center {
+	text-align: center;
+}
+
+.break {
+	height: 35px;
+	width: 100%;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+	overflow: hidden;
+ 	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	/* Negative indent footer by its height */
+	margin: 0 auto -75px;
+	/* Pad bottom by footer height */
+	padding: 75px 0 75px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  	height: 75px;
+  	padding: 25px;
+  	background-color: #f5f5f5;
+}

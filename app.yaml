@@ -1,0 +1,56 @@
+application: educational-games
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /static/(.*\.css)
+  mime_type: text/css
+  static_files: static/\1
+  upload: static/(.*\.css)
+
+- url: /static/(.*\.html)
+  mime_type: text/html
+  static_files: static/\1
+  upload: static/(.*\.html)
+
+- url: /static/(.*\.js)
+  mime_type: text/javascript
+  static_files: static/\1
+  upload: static/(.*\.js)
+
+- url: /static/(.*\.json)
+  mime_type: text/javascript
+  static_files: static/\1
+  upload: static/(.*\.json)
+
+- url: /static/(.*\.txt)
+  mime_type: text/plain
+  static_files: static/\1
+  upload: static/(.*\.txt)
+
+- url: /static/(.*\.xml)
+  mime_type: application/xml
+  static_files: static/\1
+  upload: static/(.*\.xml)
+
+# image files
+- url: /static/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: static/\1
+  upload: static/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+
+# sound files
+- url: /static/(.*\.(wav|mp3))
+  static_files: static/\1
+  upload: static/(.*\.(wav|mp3))
+
+- url: /.*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+
