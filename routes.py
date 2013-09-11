@@ -1,29 +1,31 @@
 import webapp2
 
-# Public View
-from controllers.public.PublicHomeController import PublicHome
-from controllers.public.PublicAboutController import PublicAbout
-from controllers.public.PublicMissionController import PublicMission
-from controllers.public.PublicRegisterController import PublicRegister
+# Public Controllers
+from controllers.public.PublicHomeController import *
+from controllers.public.PublicAboutController import *
+from controllers.public.PublicMissionController import *
+from controllers.public.PublicRegisterController import *
 
-# Student View
-from controllers.user.MainPageController import MainPage
-from controllers.user.GeoController import GeoPage
-from controllers.user.SpellingController import SpellingPage
-from controllers.user.MathController import MathPage
-from controllers.user.ResultsController import Results
-from controllers.user.AccountController import Account
-from controllers.user.GameController import Game
-from controllers.user.LogoutController import Logout
+# Student Controllers
+from controllers.user.MainPageController import *
+from controllers.user.GeoController import *
+from controllers.user.SpellingController import *
+from controllers.user.MathController import *
+from controllers.user.ResultsController import *
+from controllers.user.AccountController import *
+from controllers.user.GameController import *
 
-# Teachers View
-from controllers.teacher.TeacherHomeController import TeacherHome
+# Generic Controllers
+from controllers.LogoutController import *
 
-# Administration View
-from controllers.admin.AdminHomeController import AdminHome
-from controllers.admin.AdminSetup import AdminSetup
-from controllers.admin.AdminSchool import School
-from controllers.admin.AdminClass import Class
+# Teachers Controllers
+from controllers.teacher.TeacherHomeController import *
+
+# Administration Controllers
+from controllers.admin.AdminHomeController import *
+from controllers.admin.AdminSetupController import *
+from controllers.admin.AdminEditSchool import *
+from controllers.admin.AdminEditClass import *
 
 config = {}
 config['webapp2_extras.sessions'] = {
@@ -38,6 +40,7 @@ app = webapp2.WSGIApplication([
     (r'/register', PublicRegister),
 
     # Student Routes
+    (r'/student', MainPage),
     (r'/student/geo', GeoPage),
     (r'/student/spelling', SpellingPage),
     (r'/student/math', MathPage),
@@ -49,13 +52,13 @@ app = webapp2.WSGIApplication([
     (r'/logout', Logout),
 
     # Admin Routes
-    (r'/admin/', AdminHome),
+    (r'/admin', AdminHome),
     (r'/admin/setup', AdminSetup),
     (r'/admin/setup/school=(\d+)', EditSchool),
     (r'/admin/setup/school=(\d+)/class=(\d+)', EditClass),
 
     # Teacher Routes
-    (r'/teacher/', TeacherHome)
+    (r'/teacher', TeacherHome)
 
 ], debug=True, config = config)
 

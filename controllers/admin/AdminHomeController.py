@@ -1,5 +1,5 @@
-from BaseController import BaseHandler
+from ..BaseController import *
 
 class AdminHome(BaseHandler):
     def get(self):
-        self.route('/templates/admin/home.html')
+        self.route('/templates/admin/adminHome.html')

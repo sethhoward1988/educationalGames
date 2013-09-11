@@ -1,4 +1,4 @@
-from BaseController import BaseHandler
+from BaseController import *
 
 class Logout(BaseHandler):
     def get(self):

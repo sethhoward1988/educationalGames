@@ -1,5 +1,5 @@
-from BaseController import BaseHandler
+from ..BaseController import *
 
 class MathPage(BaseHandler):
     def get(self):
-        self.route('/templates/math.html')
+        self.route('/templates/user/userMath.html')

@@ -1,5 +1,5 @@
-from BaseController import BaseHandler
+from ..BaseController import *
 
 class GeoPage(BaseHandler):
     def get(self):
-        self.route('/templates/geo.html')
+        self.route('/templates/user/userGeo.html')

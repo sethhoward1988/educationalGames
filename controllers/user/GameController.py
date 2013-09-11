@@ -1,4 +1,4 @@
-from BaseController import BaseHandler
+from ..BaseController import *
 
 class Game(BaseHandler):
     def get(self):

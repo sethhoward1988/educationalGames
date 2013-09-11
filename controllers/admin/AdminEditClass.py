@@ -1,4 +1,4 @@
-from BaseController import BaseHandler
+from ..BaseController import *
 
 class EditClass(BaseHandler):
     def get(self, school_id, class_id):

@@ -1,8 +1,8 @@
-from BaseController import BaseHandler
+from ..BaseController import *
 
 class Account(BaseHandler):
     def get(self):
-        self.route('/templates/account.html')
+        self.route('/templates/user/userAccount.html')
 
     def getTemplateValues(self, user):
         return { 

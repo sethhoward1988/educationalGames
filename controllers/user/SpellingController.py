@@ -1,5 +1,5 @@
-from BaseController import BaseHandler
+from ..BaseController import *
 
 class SpellingPage(BaseHandler):
     def get(self):
-        self.route('/templates/spelling.html')
+        self.route('/templates/user/userSpelling.html')
