@@ -1,6 +1,6 @@
-import logging
 import os
 import urllib
+import json
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -10,16 +10,8 @@ import jinja2
 import webapp2
 
 JINJA_ENVIRONMENT = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    loader=jinja2.FileSystemLoader(os.path.dirname(os.path.dirname(__file__))),
     extensions=['jinja2.ext.autoescape'])
-
-class User(ndb.Model):
-    role = ndb.StringProperty()
-    date = ndb.DateTimeProperty(auto_now_add=True)
-
-    @classmethod
-    def query_user(cls, ancestor_key):
-        return cls.query(ancestor=ancestor_key)
 
 class BaseHandler(webapp2.RequestHandler):              # taken from the webapp2 extrta session example
     def dispatch(self):                                 # override dispatch
@@ -71,56 +63,3 @@ class BaseHandler(webapp2.RequestHandler):              # taken from the webapp2
                 'logout_url': '/logout'
             }
         
-
-class Logout(BaseHandler):
-    def get(self):
-        user = users.get_current_user()
-        self.session.clear()
-        self.redirect(users.create_logout_url('/'))
-
-class MainPage(BaseHandler):
-    def get(self):
-        self.route('/templates/index.html')
-
-class GeoPage(BaseHandler):
-    def get(self):
-        self.route('/templates/geo.html')
-
-class SpellingPage(BaseHandler):
-    def get(self):
-        self.route('/templates/spelling.html')
-
-class MathPage(BaseHandler):
-    def get(self):
-        self.route('/templates/math.html')
-
-class Account(BaseHandler):
-    def get(self):
-        self.route('/templates/account.html')
-
-    def getTemplateValues(self, user):
-        return { 
-            'role': self.session['user_role'],
-            'nickname': user.nickname(),
-            'email': user.email()
-        }
-
-class Results(BaseHandler):
-    def get(self):
-        self.route('/templates/results.html')
-
-config = {}
-config['webapp2_extras.sessions'] = {
-    'secret_key': 'some-secret-key',
-}
-
-app = webapp2.WSGIApplication([
-    (r'/', MainPage),
-    (r'/geo', GeoPage),
-    (r'/spelling', SpellingPage),
-    (r'/math', MathPage),
-    (r'/results', Results),
-    (r'/account', Account),
-    (r'/logout', Logout)
-], debug=True, config = config)
-

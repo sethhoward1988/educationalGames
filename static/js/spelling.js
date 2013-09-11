@@ -20,14 +20,6 @@ $(function(){
 	app.wordContainer = $('.word-container')
         setData()
 	$('#submit').on('click', function () {
-		if($(this).text() == "Send to Mrs. Howard"){
-                        sendEmail()
-			alert("We've let Mrs. Howard know! Refresh the page to practice again :)")
-                        $('.name').fadeOut()
-                        $('#submit').off('click')
-                        $('#submit').fadeOut()
-			return;
-		}
 		if(_.every($('.word-container .word input'), function (input) { return $(input).hasClass('alert-success') || $(input).hasClass('alert-warning') })){
 			app.wordContainer.slideUp(function(){
 				app.pageIndex++
@@ -36,7 +28,10 @@ $(function(){
 					app.wordContainer.html('<h1>Congratulations!</h1><p>You finished all of the words. Put your name in below to make sure Mrs. Howard knows that you got through all of the words.</p><div class="center"><input class="name" type="text" /></div>')
 					$('.page-holder').animate('min-height', '0px')
 					var input = app.wordContainer.find('input')
-					$('#submit').text("Send to Mrs. Howard")
+                    $('.name').fadeOut()
+                    $('#submit').off('click')
+                    $('#submit').fadeOut()
+                    saveScore()
 				} else {
 					buildWordSet()
 				}
@@ -139,13 +134,15 @@ function buildWordSet () {
 }
 
 
-function sendEmail () {
+function saveScore () {
     $.ajax({
-        url:'/mail.php',
+        url:'/game',
         type: 'POST',
         data: {
-            subject: $('.name').val() + "'s Spelling Quiz Results",
-            body: "<b>Correct:</b> " + app.correctWords.length + "/" + app.totalWords + " - " + app.correctWords.join(', ') + "<br /><br /><b>Skipped:</b> " + app.skippedWords.length + "/" + app.totalWords + " - " + app.skippedWords.join(', ') + "<br /><br /><b>Peeked:</b> " + app.peekedWords.length + "/" + app.totalWords + " - "+ app.peekedWords.join(', ')
+            gameName: 'spelling',
+            correct: app.correctWords.length/app.totalWords,
+            peeked: app.peekedWords.length/app.totalWords,
+            skipped: app.skippedWords.length/app.totalWords
         },
         success: function (data) {
           console.log(data)  

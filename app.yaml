@@ -46,7 +46,7 @@ handlers:
   upload: static/(.*\.(wav|mp3))
 
 - url: /.*
-  script: main.app
+  script: routes.app
 
 libraries:
 - name: webapp2
