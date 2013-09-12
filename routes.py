@@ -18,6 +18,7 @@ from controllers.user.GameController import *
 # Generic Controllers
 from controllers.LogoutController import *
 from controllers.LoginController import *
+from controllers.SignUpController import *
 
 # Teachers Controllers
 from controllers.teacher.TeacherHomeController import *
@@ -27,6 +28,9 @@ from controllers.admin.AdminHomeController import *
 from controllers.admin.AdminSetupController import *
 from controllers.admin.AdminEditSchool import *
 from controllers.admin.AdminEditClass import *
+
+# Super Administration Controllers
+from controllers.super.Dashboard import *
 
 config = {}
 config['webapp2_extras.sessions'] = {
@@ -52,12 +56,16 @@ app = webapp2.WSGIApplication([
     # Generic Routes
     (r'/logout', Logout),
     (r'/login', Login),
+    (r'/signup/userid=(\d)', Signup),
 
     # Admin Routes
     (r'/admin', AdminHome),
     (r'/admin/setup', AdminSetup),
     (r'/admin/setup/school=(\d+)', EditSchool),
     (r'/admin/setup/school=(\d+)/class=(\d+)', EditClass),
+
+    # Super Admin Routes
+    (r'/super/dashboard', Dashboard),
 
     # Teacher Routes
     (r'/teacher', TeacherHome)

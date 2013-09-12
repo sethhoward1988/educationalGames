@@ -3,14 +3,13 @@ from google.appengine.ext import ndb
 class Person(ndb.Model):
     role = ndb.StringProperty(repeated=True)
     profile = ndb.UserProperty()
-    email = ndb.StringProperty()
     f_name = ndb.StringProperty()
     l_name = ndb.StringProperty()
     date = ndb.DateTimeProperty(auto_now_add=True)
 
     @classmethod
-    def query_user(cls, ancestor_key):
-        return cls.query(ancestor=ancestor_key)
+    def query_user(cls, person_key):
+        return cls.query(person_key)
 
 class Class(ndb.Model):
 	teacher = ndb.StructuredProperty(Person)
