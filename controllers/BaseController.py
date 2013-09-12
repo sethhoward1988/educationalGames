@@ -38,26 +38,32 @@ class BaseHandler(webapp2.RequestHandler):              # taken from the webapp2
             self.response.write(template.render(template_values))
         else:
             if user:
-                print self.session.get('user_role')
-                if not self.session.get('user_role'):
-                    print "Creating new role..."
-                    ancestor_key = ndb.Key("User", user.email())
-                    userObject = User.query_user(ancestor_key).fetch()
-
-                    if len(userObject) > 0:
-                        print "found existing role..."
-                        self.session['user_role'] = userObject[0].role
-                    else:
-                        newUser = User(parent=ndb.Key("User", user.email()), role='basic')
-                        newUser.put()
-                        self.session['user_role'] = 'basic'
-                template_values = self.getTemplateValues(user).items() + self.getBaseTemplateValues(user).items()
-                print self.session.get('user_role')
+                # if not self.session.get('user_role'):
                 template = JINJA_ENVIRONMENT.get_template(template)
                 self.response.write(template.render(template_values))
             else:
                 self.redirect(users.create_login_url(self.request.uri))
-            
+    
+    def goHome(self, role):
+        try:
+            if role == 'superadmin':
+                print "User is superadmin"
+                template = "/templates/superadmin/adminHome.html"
+            elif role == 'superintendent':
+                print "User is a superintendent"
+                template = "/templates/superintendent/adminHome.html"
+            elif role == 'principal':
+                print "User is a principal"
+                template = "/templates/principal/adminHome.html"
+            elif role == 'teacher':
+                print "User is a teacher"
+                template = "/templates/teacher/adminHome.html"
+            elif role == 'student':
+                print "User is a student"
+                template = "/templates/student/studentHome.html"
+        except:
+            template = JINJA_ENVIRONMENT.get_template(template)
+            self.response.write(template.render(template_values))
 
     def getTemplateValues(self, user):
         return {}
