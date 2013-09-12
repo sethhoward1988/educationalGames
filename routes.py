@@ -17,6 +17,7 @@ from controllers.user.GameController import *
 
 # Generic Controllers
 from controllers.LogoutController import *
+from controllers.LoginController import *
 
 # Teachers Controllers
 from controllers.teacher.TeacherHomeController import *
@@ -48,8 +49,9 @@ app = webapp2.WSGIApplication([
     (r'/student/account', Account),
     (r'/student/game', Game),
     
-    # Generic Logout
+    # Generic Routes
     (r'/logout', Logout),
+    (r'/login', Login),
 
     # Admin Routes
     (r'/admin', AdminHome),
