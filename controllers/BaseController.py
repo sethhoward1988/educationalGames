@@ -5,6 +5,7 @@ import json
 from google.appengine.api import users
 from google.appengine.ext import ndb
 from webapp2_extras import sessions
+from models.Person import *
 
 import jinja2
 import webapp2
@@ -45,25 +46,7 @@ class BaseHandler(webapp2.RequestHandler):              # taken from the webapp2
                 self.redirect(users.create_login_url(self.request.uri))
     
     def goHome(self, role):
-        try:
-            if role == 'superadmin':
-                print "User is superadmin"
-                template = "/templates/superadmin/adminHome.html"
-            elif role == 'superintendent':
-                print "User is a superintendent"
-                template = "/templates/superintendent/adminHome.html"
-            elif role == 'principal':
-                print "User is a principal"
-                template = "/templates/principal/adminHome.html"
-            elif role == 'teacher':
-                print "User is a teacher"
-                template = "/templates/teacher/adminHome.html"
-            elif role == 'student':
-                print "User is a student"
-                template = "/templates/student/studentHome.html"
-        except:
-            template = JINJA_ENVIRONMENT.get_template(template)
-            self.response.write(template.render(template_values))
+        self.redirect("/" + role)
 
     def getTemplateValues(self, user):
         return {}
@@ -75,4 +58,20 @@ class BaseHandler(webapp2.RequestHandler):              # taken from the webapp2
         return {
                 'nickname': nickname
             }
+
+    def getCurrentUserRole(self, user):
+        try:
+            query = Person().query()
+            query.filter(Person.user == user)
+            person = query.fetch(1)
+            person = person[0]
+            return person.role
+        except:
+            return False
+
+
+
+
+
+
         
