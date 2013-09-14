@@ -45,8 +45,25 @@ handlers:
   static_files: static/\1
   upload: static/(.*\.(wav|mp3))
 
+# Page Handlers
+- url: /student/.*
+  script: student.app
+
+- url: /teacher/.*
+  script: teacher.app
+
+- url: /principal/.*
+  script: principal.app
+
+- url: /superintendent/.*
+  script: superintendent.app
+
+- url: /admin/.*
+  script: admin.app
+  login: admin
+
 - url: /.*
-  script: routes.app
+  script: public.app
 
 libraries:
 - name: webapp2

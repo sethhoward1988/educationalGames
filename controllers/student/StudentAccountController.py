@@ -5,8 +5,11 @@ class StudentAccount(BaseHandler):
         self.route('/templates/student/studentAccount.html')
 
     def getTemplateValues(self, user):
+
+    	
+    	
         return { 
             'role': '',
-            'nickname': user.nickname(),
+            'nickname': user.f_name + ' ' + user.l_name,
             'email': user.email()
         }

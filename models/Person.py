@@ -1,7 +1,7 @@
 from google.appengine.ext import ndb
 
 class Person(ndb.Model):
-    role = ndb.StringProperty(choices=['superadmin','superintendent','principal','teacher','student'])
+    role = ndb.StringProperty(choices=['superadmin','superintendent','principal','teacher','student'], repeated=True)
     profile = ndb.UserProperty()
     user_id = ndb.StringProperty()
     f_name = ndb.StringProperty()

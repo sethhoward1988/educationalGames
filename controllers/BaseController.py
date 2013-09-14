@@ -61,14 +61,32 @@ class BaseHandler(webapp2.RequestHandler):              # taken from the webapp2
 
     def getCurrentUserRole(self, user):
         try:
-            query = Person().query()
-            query.filter(Person.user == user)
+            print "getting current user"
+            query = Person.query(Person.user_id == user.user_id())
             person = query.fetch(1)
             person = person[0]
             return person.role
         except:
             return False
 
+    def getCurrentPerson():
+        user = users.get_current_user()
+        try:
+            print "getting current user"
+            query = Person.query(Person.user_id == user.user_id())
+            person = query.fetch(1)
+            person = person[0]
+            return person.role
+        except:
+            return False
+
+    def baseRedirect(self):
+        user = users.get_current_user()
+        role = self.getCurrentUserRole(user)
+        try:
+            self.goHome(role[0])
+        except:
+            self.route("/templates/public/publicHome.html", True)
 
 
 
