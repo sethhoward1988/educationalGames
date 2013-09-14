@@ -1,10 +1,14 @@
 import webapp2
 
+# Import Error Handlers
+from controllers.ErrorController import *
+
 # Public Controllers
 from controllers.public.PublicHomeController import *
+from controllers.public.PublicProductController import *
 from controllers.public.PublicAboutController import *
 from controllers.public.PublicMissionController import *
-from controllers.public.PublicRegisterController import *
+from controllers.public.PublicContactController import *
 
 # Generic Controllers
 from controllers.LogoutController import *
@@ -14,7 +18,8 @@ from controllers.RedirectController import *
 
 # Import Classes
 from models.Person import *
-from models.Score import *
+from models.School import *
+from models.Game import *
 
 print "Running Public Routes"
 
@@ -29,7 +34,8 @@ app = webapp2.WSGIApplication([
     (r'/', PublicHome),
     (r'/about', PublicAbout),
     (r'/mission', PublicMission),
-    (r'/register', PublicRegister),
+    (r'/product', PublicProduct),
+    (r'/contact', PublicContact),
 
     # Generic Routes
     (r'/logout', Logout),
@@ -39,3 +45,6 @@ app = webapp2.WSGIApplication([
     (r'/redirect', Redirect)
 
 ], debug=True, config = config, )
+
+app.error_handlers[404] = handle_404
+app.error_handlers[500] = handle_500

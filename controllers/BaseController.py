@@ -46,7 +46,7 @@ class BaseHandler(webapp2.RequestHandler):              # taken from the webapp2
                 self.redirect(users.create_login_url(self.request.uri))
     
     def goHome(self, role):
-        self.redirect("/" + role)
+        self.redirect("/" + role + "/home")
 
     def getTemplateValues(self, user):
         return {}

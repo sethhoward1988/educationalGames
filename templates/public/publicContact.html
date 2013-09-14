@@ -1,0 +1,62 @@
+
+{% extends "/templates/public/publicBase.html" %}
+{% block title %}Home{% endblock %}
+
+{% block htmlhead %}
+{% endblock %}
+
+{% block content %}
+	<div class="container contact">
+	    <div class="page-header">
+            <div class="row">
+              <div class="col-md-3">
+              	<h3>Other Contact Methods</h3>
+              	<p>In case you don't trust that big text box.</p>
+              	<h3>Address</h3>
+              	<p>The Learning Center</p>
+              	<p>455 Belmont Pl</p>
+              	<p>Provo, UT</p>
+              	<h3>Email</h3>
+              	<p><a href="mailto:smiles.seth@gmail.com">smiles.seth@gmail.com</a></p>
+              </div>
+              <div class="col-md-9">
+              	<h1>Comments, Questions, Feedback?</h1>
+              	<p>We'd love to hear it.</p>
+              	<form action="/contact" method="post">
+              		<div class="row">
+                    <div class="col-md-12">
+                      Your Name
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input type="text" name="name">
+                    </div>
+                  </div>
+                  <div class="row">
+              			<div class="col-md-12">
+              				Your Email
+              			</div>
+              		</div>
+              		<div class="row">
+              			<div class="col-md-12">
+		              		<input type="text" name="sender_email">
+		              	</div>
+	                </div>
+	                <div class="row">
+	                	<div class="col-md-12">
+	                		Your Message
+	                	</div>
+	              	</div>
+	              	<div class="row">
+	              		<div class="col-md-12">
+	              			<textarea name="body"></textarea>
+	              		</div>
+	              	</div>
+	              	<button type="submit" class="btn-primary">Send It</button>
+	            </form>
+              </div>
+            </div>
+        </div>
+	</div>
+{% endblock %}

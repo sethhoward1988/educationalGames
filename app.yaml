@@ -40,6 +40,11 @@ handlers:
   static_files: static/\1
   upload: static/(.*\.(bmp|gif|ico|jpeg|jpg|png))
 
+# font files
+- url: /static/(.*\.(woff|ttf|svg|eot))
+  static_files: static/\1
+  upload: static/(.*\.(woff|ttf|svg|eot))
+
 # sound files
 - url: /static/(.*\.(wav|mp3))
   static_files: static/\1
@@ -47,23 +52,23 @@ handlers:
 
 # Page Handlers
 - url: /student/.*
-  script: student.app
+  script: routes.student.app
 
 - url: /teacher/.*
-  script: teacher.app
+  script: routes.teacher.app
 
 - url: /principal/.*
-  script: principal.app
+  script: routes.principal.app
 
 - url: /superintendent/.*
-  script: superintendent.app
+  script: routes.superintendent.app
 
 - url: /admin/.*
-  script: admin.app
+  script: routes.admin.app
   login: admin
 
 - url: /.*
-  script: public.app
+  script: routes.public.app
 
 libraries:
 - name: webapp2

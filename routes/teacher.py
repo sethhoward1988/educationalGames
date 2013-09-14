@@ -5,14 +5,15 @@ from google.appengine.api import users
 # Import Error Handlers
 from controllers.ErrorController import *
 
-# Principals Controllers
-from controllers.principal.PrincipalHomeController import *
+# Teachers Controllers
+from controllers.teacher.TeacherHomeController import *
 
 # Import Classes
 from models.Person import *
-from models.Score import *
+from models.School import *
+from models.Game import *
 
-print "Running Principal Routes"
+print "Running Teacher Routes"
 
 current_user = users.get_current_user()
 query = Person.query(Person.user_id == current_user.user_id())
@@ -21,8 +22,8 @@ try:
     current_person = person[0]
 except:
     current_person = False
-if current_person == False or 'principal' not in current_person.role:
-    app = webapp2.WSGIApplication([(r'/principal/.*', GoHome)],debug=True)
+if current_person == False or 'teacher' not in current_person.role:
+    app = webapp2.WSGIApplication([(r'/teacher/.*', GoHome)],debug=True)
 else:
     config = {}
     config['webapp2_extras.sessions'] = {
@@ -33,7 +34,8 @@ else:
 
     app = webapp2.WSGIApplication([
         # Teacher Routes
-    	(r'/principal/home', PrincipalHome)
+    	(r'/teacher/home', TeacherHome)
+        
     ], debug=True, config = config)
     app.error_handlers[404] = handle_404
     app.error_handlers[500] = handle_500

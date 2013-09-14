@@ -74,7 +74,11 @@ class SignupPost(BaseHandler):
 
         if user:
             requested_role = self.request.POST.getall('role[]')[0]
-            requestee_role = self.getCurrentUserRole(user)[0]
+            if users.is_current_user_admin():
+                requestee_role = 'admin'
+            else:
+                requestee_role = self.getCurrentUserRole(user)[0]
+            
             print requestee_role
             print requested_role
             

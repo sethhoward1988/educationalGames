@@ -10,7 +10,8 @@ from controllers.admin.AdminDashboardController import *
 
 # Import Classes
 from models.Person import *
-from models.Score import *
+from models.School import *
+from models.Game import *
 
 print "Running Admin Route"
 

@@ -1,0 +1,106 @@
+
+{% extends "/templates/public/publicBase.html" %}
+{% block title %}Home{% endblock %}
+
+{% block htmlhead %}
+{% endblock %}
+
+{% block content %}
+<style>
+	.times-table-answer {
+	    width:35px;
+	    border: none;
+	    background-color: transparent;
+	}
+
+	.times-table td, .times-table th {
+	    border: 1px solid black;
+	    text-align: center;
+	    width: 35px;
+	}
+
+	.times-table input {
+	    text-align: center;
+	}
+
+	.active {
+	    background-color: #eee;
+	}
+
+	.active.header {
+	    color: white;
+	    background-color: black;
+	}
+
+	input.alert-success {
+	    background-color: #dff0d8 !important;
+	}
+
+	input.alert-warning {
+	    background-color: #fcf8e3;
+	}
+
+	.active input.alert-success {
+	    background-color: #eee !important;
+	    color: black;
+	}
+
+	.times-table {
+	    text-align: center;
+	    margin-top: 20px;
+	}
+
+	.times-table table {
+	    margin: 0 auto;
+	}
+</style>
+	<div class="container product">
+		<div class="break"></div>
+	    <div class="row featurette">
+	        <div class="col-md-7">
+	          <h2 class="featurette-heading">Gamification. <span class="text-muted">Making education fun again.</span></h2>
+	          <p class="lead">Most children find filling out worksheets mundane and boring. The learning center targets that notion by creating fun and innovative games that attract children. Whether is be geography, math, science, we're sure to match a game that will interest your child.</p>
+	        </div>
+	        <div class="col-md-5">
+	          <img class="featurette-image img-responsive img-thumbnail" src="/static/img/geo.png" data-src="holder.js/500x500/auto" alt="Geography Quiz Game">
+	        </div>
+	      </div>
+	      <hr class="featurette-divider">
+	      <div class="row featurette">
+	        <div class="col-md-5">
+	          <img class="featurette-image img-responsive img-thumbnail" src="/static/img/spelling.png" data-src="holder.js/500x500/auto" alt="Create Your Own Spelling Test">
+	        </div>
+	        <div class="col-md-7">
+	          <h2 class="featurette-heading">Dynamic Content. <span class="text-muted">Get Involved.</span></h2>
+	          <p class="lead">The Learning center gives the ability for teachers and parents to create content for their own children. Teachers can create practice spelling lists and record their own voice that their child will then listen to. Teachers and parents can also limit access to games that they find relevant to the material being taught in class.</p>
+	        </div>
+	      </div>
+	      <div class="row featurette">
+	        <div class="col-md-7">
+	          <h2 class="featurette-heading">Analytics. <span class="text-muted">Monitor Progress</span></h2>
+	          <p class="lead">Each time your child finishes a game, the results are stored on our secure servers. Teachers and parents can visualize results through charts and graphs and track the students usage and correlations to performance on in-class quizzes and tests.</p>
+	        </div>
+	        <div class="col-md-5">
+	          <img class="featurette-image img-responsive img-thumbnail" src="/static/img/analytics.png" data-src="holder.js/500x500/auto" alt="Track your students progress">
+	        </div>
+	      </div>
+	      <hr class="featurette-divider">
+	      <div class="row featurette">
+	        <div class="col-md-5">
+	          <img class="featurette-image img-responsive img-thumbnail" src="/static/img/try.jpg" data-src="holder.js/500x500/auto" alt="Test your skills">
+	        </div>
+	        <div class="col-md-7">
+	          <h2 class="featurette-heading">Give it a try. <span class="text-muted">It's only 5th Grade Math...</span></h2>
+	          <p class="lead">Think you've got what it takes? Our games inspire friendly competition and reward students with badges and achievements. Below is one of our games, the times table game. Simply click a cell in the grid below and start filling it out as fast as you can. Keep track of time to test against your friends, spouse, whomever.</p>
+	        </div>
+	      </div>
+	      <hr class="featurette-divider">
+	      <div class="times-table"></div>
+	      <script type="text/javascript" src="/static/js/math.js"></script>
+	      <script>
+	      	var table = createTimesTable(10)
+            var timesTable = $('.times-table')
+            $('.times-table').append(table)
+	      </script>
+	</div>
+{% endblock %}
