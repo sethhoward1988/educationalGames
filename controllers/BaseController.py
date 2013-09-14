@@ -86,7 +86,7 @@ class BaseHandler(webapp2.RequestHandler):              # taken from the webapp2
         try:
             self.goHome(role[0])
         except:
-            self.route("/templates/public/publicHome.html", True)
+            self.redirect('/')
 
 
 

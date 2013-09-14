@@ -6,7 +6,7 @@ from google.appengine.api import users
 from controllers.ErrorController import *
 
 # Super Administration Controllers
-from controllers.admin.adminDashboard import *
+from controllers.admin.AdminDashboardController import *
 
 # Import Classes
 from models.Person import *
@@ -16,7 +16,7 @@ print "Running Admin Route"
 
 config = {}
 config['webapp2_extras.sessions'] = {
-    'secret_key': 'some-secret-key',
+    'secret_key': 'some-secret-key'
 }
 
 print "Running Admin App"
@@ -24,9 +24,9 @@ print "Running Admin App"
 app = webapp2.WSGIApplication([
 
     # Super Admin Routes
-    (r'/admin/home', AdminDashboard),
+    (r'/admin/home', AdminDashboard)
 
-], debug=True, config = config, )
+], debug=True, config = config)
 
 
 
