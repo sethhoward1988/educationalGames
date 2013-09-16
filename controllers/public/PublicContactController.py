@@ -7,8 +7,8 @@ class PublicContact(BaseHandler):
         self.route('/templates/public/publicContact.html', True)
 
     def post(self):
-        body = re.escape(self.request.get('body'))
-        mail.send_mail(sender= self.request.get('name') + " <" + self.request.get('sender_email') + ">",
+        body = re.escape(self.request.get('name') + " " + self.request.get('sender_email')) + " Body: " + re.escape(self.request.get('body'))
+        mail.send_mail("Seth Howard <smiles.seth@gmail.com>",
               to="Seth Howard <smiles.seth@gmail.com>",
               subject="Learning Center Feedback",
               body= body)

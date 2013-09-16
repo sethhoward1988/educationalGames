@@ -52,23 +52,23 @@ handlers:
 
 # Page Handlers
 - url: /student/.*
-  script: routes.student.app
+  script: routes.studentRoutes.app
 
 - url: /teacher/.*
-  script: routes.teacher.app
+  script: routes.teacherRoutes.app
 
 - url: /principal/.*
-  script: routes.principal.app
+  script: routes.principalRoutes.app
 
 - url: /superintendent/.*
-  script: routes.superintendent.app
+  script: routes.superintendentRoutes.app
 
 - url: /admin/.*
-  script: routes.admin.app
+  script: routes.adminRoutes.app
   login: admin
 
 - url: /.*
-  script: routes.public.app
+  script: routes.publicRoutes.app
 
 libraries:
 - name: webapp2

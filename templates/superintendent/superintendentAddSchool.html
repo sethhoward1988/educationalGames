@@ -2,42 +2,30 @@
 {% extends "/templates/superintendent/superintendentBase.html" %}
 {% block title %}Home{% endblock %}
 
-{% block htmlhead %}
-{% endblock %}
-
 {% block content %}
 	<div class="container add-school">
 	    <div class="page-header">
             <h1>Create a New School</h1>
         </div>
-        <form method="post" action="/superintendent/school">
-        	<table>
-        		<thead></thead>
-        		<tbody>
-        			<tr>
-        				<td>School Name</td>
-        				<td><input type="text" name="name" ></td>
-        			</tr>
-        			<tr>
-        				<td colspan="2"><h2>School Administrator Information</h2></td>
-        			</tr>
-					<tr>
-						<td>First Name: </td>
-						<td><input type="text" name="f_name"></td>
-					</tr>
-					<tr>
-						<td>Last Name: </td>
-						<td><input type="text" name="l_name"></td>
-					</tr>
-					<tr>
-						<td>Email: </td>
-						<td><input type="text" name="email"></td>
-					</tr>
-					<tr>
-        				<td><button type="submit" class="btn-primary">Save</button>
-        			</tr>
-				</tbody>
-			</table>
+        <form class="form-horizontal" role="form" method="post" action="/superintendent/school">
+        	<div class="form-group">
+                <label for="inputEmail1" class="col-lg-2 control-label">School Name</label>
+                <div class="col-lg-10">
+                    <input type="text" name="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail1" class="col-lg-2 control-label">Admin Email</label>
+                <div class="col-lg-10">
+                    <input type="text" name="email">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <button type="submit" class="btn-primary">Save</button>
+                </div>
+            </div>
+            <input type="hidden" name="type" value="new">
         </form>
 	</div>
 {% endblock %}

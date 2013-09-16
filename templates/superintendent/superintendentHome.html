@@ -2,31 +2,35 @@
 {% extends "/templates/superintendent/superintendentBase.html" %}
 {% block title %}Home{% endblock %}
 
-{% block htmlhead %}
-{% endblock %}
-
 {% block content %}
-	<div class="container">
-        <h1>Current District Structure</h1>
+    <div class="container">
+        <h1>{{ district.name }}</h1>
         <div class="pull-right">
-                <a href="/superintendent/school">
-                        <button type="button" class="btn-primary">Add School</button>
-                </a>
+            <a href="/superintendent/school">
+                <button type="button" class="btn-primary">Add School</button>
+            </a>
         </div>
-        <h2>School District</h2>
-        {{ district.name }}
-        
         <h2>Schools</h2>
         {% for school in district.schools %}
-        <h3>{{ school.name }}</h3>
-        <a href="/superintendent/school/{{ school.guid }}"><button type="button" class="btn-primary">Edit</button></a>
-        <h4>Principal</h4>
-	        {% for principal in school.principals %}
-                {% if principal.f_name and principal.l_name %}
-                        <div class="name">{{ principal.f_name + " " + principal.l_name }}</div>
-                        <div class="email">{{ principal.email }}</div>
+        <div class="school">
+            <div class="school-header">
+                <h3>{{ school.name }}</h3>
+                <a  class="edit-button" href="/superintendent/school/{{ school.guid }}"><div class="glyphicon glyphicon-cog"></div></a>    
+            </div>
+            <div class="school-content">
+            <h4>Learning Center Admin</h4>
+                {% if school.principalLength > 0 %}
+                    {% for principal in school.principals %}
+                        {% if principal.full_name %}
+                            <div class="name">{{ principal.full_name }}</div>    
+                        {% endif %}
+                            <div class="email">{{ principal.email }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-danger">No Admin Chosen</div>
                 {% endif %}
-	        {% endfor %}
+            </div>
+        </div>
         {% endfor %}
-	</div>
+    </div>
 {% endblock %}

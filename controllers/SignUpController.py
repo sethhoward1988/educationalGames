@@ -22,21 +22,21 @@ class Signup(BaseHandler):
             template = JINJA_ENVIRONMENT.get_template("/templates/error.html")
             self.response.write(template.render(template_values))
             return
-        # try:
-        if person.validated:
-            print "This account has already been validated"
-            self.goHome(person.role[0])
-        else:
-            print "Person is not validated..."
-            template_values = {
-                "guid": person.guid,
-                "role": person.role[0]
-            }
-            template = JINJA_ENVIRONMENT.get_template("/templates/signup.html")
-            self.response.write(template.render(template_values))
-        # except:
-        #     template = JINJA_ENVIRONMENT.get_template("/templates/public/publicHome.html")
-        #     self.response.write(template.render())
+        try:
+            if person.validated:
+                print "This account has already been validated"
+                self.goHome(person.role[0])
+            else:
+                print "Person is not validated..."
+                template_values = {
+                    "guid": person.guid,
+                    "role": person.role[0]
+                }
+                template = JINJA_ENVIRONMENT.get_template("/templates/signup.html")
+                self.response.write(template.render(template_values))
+        except:
+            template = JINJA_ENVIRONMENT.get_template("/templates/public/publicHome.html")
+            self.response.write(template.render())
 
     def post(self, guid):
         print "We're posting some data... for " + guid

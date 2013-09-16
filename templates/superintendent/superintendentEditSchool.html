@@ -2,17 +2,83 @@
 {% extends "/templates/superintendent/superintendentBase.html" %}
 {% block title %}Home{% endblock %}
 
-{% block htmlhead %}
-{% endblock %}
-
 {% block content %}
 	<div class="container">
+		{% for school in schools %}
 	    <div class="page-header">
-	    	<form method="post" action="/superintendent/school/{{ school.guid }}">
-		        <h1>Editing {{ school.name }}</h1>
-		        <input type="text" name="name" value="{{ school.name }}">
-		        <button type="submit" class="btn-primary">Save</button>
+	    	<div class="pull-right">
+	    		<form method="post" action="/superintendent/school">
+	    			<input type="hidden" name="school_guid" value="{{ school.guid }}">
+	    			<input type="hidden" name="type" value="delete">
+	    			<button type="submit" class="btn btn-danger">Delete {{ school.name }}</button>
+	    		</form>
+	    	</div>
+	    	<h1>Editing {{ school.name }}</h1>
+	    </div>
+	    	<form class="form-horizontal" role="form" method="post" action="/superintendent/school/{{ school.guid }}">
+		        <div class="form-group">
+	                <label for="inputEmail1" class="col-lg-2 control-label">School Name</label>
+	                <div class="col-lg-10">
+	                    <input type="text" name="name" value="{{ school.name }}">
+	                </div>
+	            </div>
+	            <div class="form-group">
+	                <label for="inputEmail1" class="col-lg-2 control-label">School Name</label>
+	                <div class="col-lg-10">
+	                    <button type="submit" class="btn-primary">Update</button>
+	                </div>
+	            </div>
 		    </form>
-        </div>
+		    {% if school.principalLength > 0 %}
+			    {% for principal in school.principals %}
+			    	<h2>Learning Center Administration for {{ school.name }}</h2>
+			    	
+                	<form class="form-horizontal" role="form" method="post" action="/superintendent/relieve">
+                		{% if principal.full_name %}
+                		<div class="form-group">
+			                <label for="inputEmail1" class="col-lg-2 control-label">Name</label>
+			                <div class="col-lg-10">
+			                    <div>{{ principal.full_name }}</div>
+			                </div>
+			            </div>
+						{% endif %}
+						<div class="form-group">
+			                <label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+			                <div class="col-lg-10">
+			                    {{ principal.email }}
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label for="inputEmail1" class="col-lg-2 control-label"></label>
+			                <div class="col-lg-10">
+			                    <button type="submit" class="btn-primary">Relieve Admin</button>
+			                </div>
+			            </div>
+                        <input type="hidden" name="principal_guid" value="{{ principal.guid }}">
+                        <input type="hidden" name="school_guid" value="{{ school.guid }}">
+	                    <input type="hidden" name="type" value="update">
+                    </form>
+	            {% endfor %}
+            {% else %}
+            	<h2>School Administrator Information</h2>
+	            <form class="form-horizontal" role="form" method="post" action="/superintendent/school">
+	                <p>Currently no administrator for {{ school.name }} exists. You can add one by filling out a valid email below</p>
+	                <div class="form-group">
+		                <label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+		                <div class="col-lg-10">
+		                    <input type="text" name="email">
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <label for="inputEmail1" class="col-lg-2 control-label"></label>
+		                <div class="col-lg-10">
+		                    <button type="submit" class="btn-primary">Update Administrator</button>
+		                </div>
+		            </div>
+	                <input type="hidden" name="type" value="newAdmin">
+	                <input type="hidden" name="school_guid" value="{{ school.guid }}">
+	            </form>
+            {% endif %}
+        {% endfor %}
 	</div>
 {% endblock %}

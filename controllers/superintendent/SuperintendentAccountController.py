@@ -3,6 +3,7 @@ from ..BaseController import *
 class SuperintendentAccount(BaseHandler):
     def get(self):
     	templateOptions = {
+            'nickname': users.get_current_user().nickname(),
             'person': self.app.config.get("webapp2_extras.sessions")["current_person"],
         }
         template = JINJA_ENVIRONMENT.get_template('/templates/superintendent/superintendentAccount.html')

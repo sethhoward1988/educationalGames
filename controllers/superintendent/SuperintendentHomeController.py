@@ -7,7 +7,6 @@ class SuperintendentHome(BaseHandler):
         templateOptions["nickname"] = user.nickname()
         templateOptions["district"] = {}
 
-        current_person = self.app.config.get("webapp2_extras.sessions")["current_person"]
         school_district = self.app.config.get("webapp2_extras.sessions")["school_district"]
 
         templateOptions["district"]["name"] = school_district.name
@@ -26,10 +25,12 @@ class SuperintendentHome(BaseHandler):
             currentSchool["name"] = school.name
             currentSchool["guid"] = school.guid
             currentSchool["principals"] = []
+            currentSchool["principalLength"] = 0
 
             for key in school.administrator:
                 principal = key.get()
                 currentSchool["principals"].append(principal)
+                currentSchool["principalLength"] += 1
 
             templateOptions["district"]["schools"].append(currentSchool)
 

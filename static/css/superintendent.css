@@ -1,0 +1,30 @@
+
+.school {
+	position: relative;
+	min-width: 300px;
+	border-radius: 5px;
+	box-shadow:0px 0px 8px -2px black;
+	display: inline-block;
+	margin:20px;
+	vertical-align: top;
+}
+
+.school-header {
+	padding: 15px;
+	border-bottom: 1px solid #ccc;
+}
+
+.edit-button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.school-content {
+	padding: 15px;
+}
+
+.form-horizontal input {
+	padding: 2px 10px;
+	width: 300px;
+}

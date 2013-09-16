@@ -1,0 +1,41 @@
+
+{% extends "/templates/superintendent/superintendentBase.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+	<div class="container account">
+	    <div class="page-header">
+	    	<h1>Edit {{ district.name }}</h1>
+	    </div>
+    	<form class="form-horizontal" role="form" method="post" action="/superintendent/district">
+    		<div class="form-group">
+                <label for="inputEmail1" class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-10">
+                    <input type="text" name="name" value="{{ district.name }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail1" class="col-lg-2 control-label"></label>
+                <div class="col-lg-10">
+                    <button type="submit" class="btn-primary">Update</button>
+                </div>
+            </div>
+	    </form>
+	    <h2>Current Administrator(s)</h2>
+	    {% for admin in administrators %}
+		    <form class="form-horizontal" role="form">
+	    		<div class="form-group">
+	                <label for="inputEmail1" class="col-lg-2 control-label">Name</label>
+	                <div class="col-lg-10">
+	                    <p>{{ admin.full_name }}</p>
+	                </div>
+	            </div>
+	            <div class="form-group">
+	                <label for="inputEmail1" class="col-lg-2 control-label">Email</label>
+	                <div class="col-lg-10">
+	                    {{ admin.email }}
+	                </div>
+	            </div>
+	        </form>
+	    {% endfor %}
+	</div>
+{% endblock %}
