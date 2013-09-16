@@ -83,6 +83,7 @@ class BaseHandler(webapp2.RequestHandler):              # taken from the webapp2
     def baseRedirect(self):
         user = users.get_current_user()
         role = self.getCurrentUserRole(user)
+        print role
         try:
             self.goHome(role[0])
         except:

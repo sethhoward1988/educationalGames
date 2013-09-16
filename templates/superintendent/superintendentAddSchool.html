@@ -1,0 +1,43 @@
+
+{% extends "/templates/superintendent/superintendentBase.html" %}
+{% block title %}Home{% endblock %}
+
+{% block htmlhead %}
+{% endblock %}
+
+{% block content %}
+	<div class="container add-school">
+	    <div class="page-header">
+            <h1>Create a New School</h1>
+        </div>
+        <form method="post" action="/superintendent/school">
+        	<table>
+        		<thead></thead>
+        		<tbody>
+        			<tr>
+        				<td>School Name</td>
+        				<td><input type="text" name="name" ></td>
+        			</tr>
+        			<tr>
+        				<td colspan="2"><h2>School Administrator Information</h2></td>
+        			</tr>
+					<tr>
+						<td>First Name: </td>
+						<td><input type="text" name="f_name"></td>
+					</tr>
+					<tr>
+						<td>Last Name: </td>
+						<td><input type="text" name="l_name"></td>
+					</tr>
+					<tr>
+						<td>Email: </td>
+						<td><input type="text" name="email"></td>
+					</tr>
+					<tr>
+        				<td><button type="submit" class="btn-primary">Save</button>
+        			</tr>
+				</tbody>
+			</table>
+        </form>
+	</div>
+{% endblock %}

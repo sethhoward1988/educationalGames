@@ -16,6 +16,9 @@ from controllers.LoginController import *
 from controllers.SignUpController import *
 from controllers.RedirectController import *
 
+# Populate DB 
+from controllers.Populate import *
+
 # Import Classes
 from models.Person import *
 from models.School import *
@@ -36,6 +39,7 @@ app = webapp2.WSGIApplication([
     (r'/mission', PublicMission),
     (r'/product', PublicProduct),
     (r'/contact', PublicContact),
+    (r'/populate', Populate),
 
     # Generic Routes
     (r'/logout', Logout),
@@ -43,6 +47,13 @@ app = webapp2.WSGIApplication([
     (r'/signup/(.+)', Signup),  # User ID
     (r'/signup', SignupPost),
     (r'/redirect', Redirect)
+
+    # json calls
+    # (r'/person', PersonController),
+    # (r'/district', DistrictController),
+    # (r'/school', SchoolController),
+    # (r'/class', ClassController),
+    # (r'/game', GameController)
 
 ], debug=True, config = config, )
 

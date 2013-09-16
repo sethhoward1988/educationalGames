@@ -8,4 +8,4 @@ class Login(BaseHandler):
             self.baseRedirect()
         else:
             self.session.clear()
-            self.redirect(users.create_login_url('/'))
+            self.redirect(users.create_login_url('/login'))

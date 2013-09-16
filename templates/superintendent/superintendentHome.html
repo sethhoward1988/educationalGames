@@ -7,11 +7,26 @@
 
 {% block content %}
 	<div class="container">
-	    <div class="page-header">
-            <h1>Current Structure</h1>
+        <h1>Current District Structure</h1>
+        <div class="pull-right">
+                <a href="/superintendent/school">
+                        <button type="button" class="btn-primary">Add School</button>
+                </a>
         </div>
         <h2>School District</h2>
+        {{ district.name }}
+        
         <h2>Schools</h2>
-        <h2>Classrooms</h2>
+        {% for school in district.schools %}
+        <h3>{{ school.name }}</h3>
+        <a href="/superintendent/school/{{ school.guid }}"><button type="button" class="btn-primary">Edit</button></a>
+        <h4>Principal</h4>
+	        {% for principal in school.principals %}
+                {% if principal.f_name and principal.l_name %}
+                        <div class="name">{{ principal.f_name + " " + principal.l_name }}</div>
+                        <div class="email">{{ principal.email }}</div>
+                {% endif %}
+	        {% endfor %}
+        {% endfor %}
 	</div>
 {% endblock %}

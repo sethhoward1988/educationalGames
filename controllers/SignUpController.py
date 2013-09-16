@@ -28,9 +28,6 @@ class Signup(BaseHandler):
             self.goHome(person.role[0])
         else:
             print "Person is not validated..."
-            person.validated = True
-            person.user_id = user.user_id()
-            person.put()
             template_values = {
                 "guid": person.guid,
                 "role": person.role[0]
@@ -50,8 +47,7 @@ class Signup(BaseHandler):
             self.redirect(users.create_login_url(self.request.uri))
             return
 
-        query = Person().query()
-        query.filter(Person.user_id == user.user_id())
+        query = Person.query(Person.guid == guid)
         person = query.fetch(1)
         person = person[0]
 
@@ -59,6 +55,8 @@ class Signup(BaseHandler):
             person.f_name = self.request.get('f_name')
             person.l_name = self.request.get('l_name')
             person.profile = user
+            person.validated = True
+            person.user_id = user.user_id()
             self.goHome(person.role[0])
             person.put()
         except:
@@ -66,14 +64,13 @@ class Signup(BaseHandler):
 
         self.goHome(person.role[0])
 
-class SignupPost(BaseHandler):
-    def post(self):
-        self.response.headers['Content-Type'] = 'application/json'   
+class UserCreation(BaseHandler):
+    def createUser(self, user_info, user, uri):
         # Verifying authenticity of signup request
-        user = users.get_current_user()
-
         if user:
-            requested_role = self.request.POST.getall('role[]')[0]
+            print "Printing User Info Object"
+            print user_info
+            requested_role = user_info["role"]
             if users.is_current_user_admin():
                 requestee_role = 'admin'
             else:
@@ -83,55 +80,51 @@ class SignupPost(BaseHandler):
             print requested_role
             
             if requestee_role == 'superintendent' and requested_role not in ['principal','teacher','student']:
-                obj = {
+                return {
                     'error': 'User does not have permissions to create that role'
                 }
             elif requestee_role == 'principal' and requested_role not in ['teacher', 'student']:
-                obj = {
+                return {
                     'error': 'User does not have permissions to create that role'
                 }
             elif requestee_role == 'teacher' and requested_role  not in ['student']:
-                obj = {
+                return {
                     'error': 'User does not have permissions to create that role'
                 }
             elif requestee_role == False:
-                obj = {
+                return {
                     'error': 'User does not have permissions to create that role'
                 }
             else:
                 # Check to see if user already exists
                 try:    
-                    email = self.request.get('email')
+                    email = user_info.email
                     query = Person.query(Person.email == email)
                     person = query.fetch(1)
                     person = person[0]
                     print person
                     if person:
                         print "User already exists..."
-                        obj = {
+                        return {
                             'error': 'User already exists'
                         }
 
                 except:
                     print "Creating User..."
                     guid = str(uuid4())
-                    f_name = self.request.get('f_name')
-                    l_name = self.request.get('l_name')
+                    f_name = user_info["f_name"]
+                    l_name = user_info["l_name"]
                     
-                    person = Person(email=email, role=self.request.POST.getall('role[]'), guid=guid)
+                    person = Person(f_name=f_name, l_name=l_name, email=user_info["email"], role=[user_info["role"]], guid=guid)
                     person.put()
-                    self.sendEmail(f_name, l_name, email, guid)
-                    obj = {
-                        'success': 'Account has been created'
-                    }
+                    # self.sendEmail(f_name, l_name, user_info["email"], guid, uri)
+                    return person
         else:
-            obj = {
+            return {
                 'error': 'No user logged in'
             }
-        
-        self.response.out.write(json.dumps(obj))
 
-    def sendEmail(self, f_name, l_name, email, guid):
+    def sendEmail(self, f_name, l_name, email, guid, uri):
         mail.send_mail(sender="Educational Games Team <smiles.seth@gmail.com>",
               to=f_name + " " + l_name + " <" + email + ">",
               subject="Educational Games Account Creation",
@@ -142,7 +135,7 @@ class SignupPost(BaseHandler):
                 will need to do is follow the link below to verify your account and
                 add some additional details.
 
-                """ + self.request.uri + "/" + guid + """
+                """ + uri + "/" + guid + """
 
                 Please let us know if you have any questions.
 

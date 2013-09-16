@@ -22,16 +22,17 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/admin">Educational Games - Superintendent</a>
+                    <a class="navbar-brand" href="/superintendent/home"><img src="/static/img/logo.png" /></a>
                   </div>
                   <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                      <!-- <li><a href="/admin/setup">Setup</a></li> -->
+                      <li><a>Superintendent Dashboard</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ nickname }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                          <li><a href="/superintendent/account">My Account</a></li>
                           <li><a href="/logout">Logout</a></li>
                         </ul>
                       </li>
@@ -41,11 +42,6 @@
               </div>
             {% block content %}{% endblock %}
             <div class="break"></div>
-        </div>
-        <div id="footer" class="footer">
-            <div class="container">
-                Copyright Chloe Howard 2013
-            </div>
         </div>
     </body>
 </html>
