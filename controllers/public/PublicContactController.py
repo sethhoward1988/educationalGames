@@ -1,4 +1,5 @@
 from ..BaseController import *
+import re
 from google.appengine.api import mail
 
 class PublicContact(BaseHandler):
