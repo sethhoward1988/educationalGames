@@ -45,7 +45,7 @@ app = webapp2.WSGIApplication([
     (r'/logout', Logout),
     (r'/login', Login),
     (r'/signup/(.+)', Signup),  # User ID
-    (r'/signup', SignupPost),
+    # (r'/signup', SignupPost),
     (r'/redirect', Redirect)
 
     # json calls
