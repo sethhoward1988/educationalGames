@@ -51,7 +51,7 @@ class Populate(BaseHandler):
         school3 = School(parent=schoolDistrict.key, administrator=[principal3.key], name="Rolling Hills", guid=str(uuid4()))
         school3.put()
 
-        classRoom = Class(parent=school1.key, room_number="R205", teacher=[teacher1.key], students=[student1.key, student2.key, student3.key, student4.key], guid=str(uuid4()))
+        classRoom1 = Class(parent=school1.key, room_number="R205", teacher=[teacher1.key], students=[student1.key, student2.key, student3.key, student4.key], guid=str(uuid4()))
         classRoom.put()
 
         

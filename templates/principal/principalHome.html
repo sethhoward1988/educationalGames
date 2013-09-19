@@ -2,16 +2,19 @@
 {% extends "/templates/principal/principalBase.html" %}
 {% block title %}Home{% endblock %}
 
-{% block htmlhead %}
-{% endblock %}
-
 {% block content %}
 	<div class="container">
 	    <div class="page-header">
-            <h1>Principal Home</h1>
+            <div class="pull-right">
+                <a href="/principal/class">
+                    <button type="button" class="btn-primary">Add Classroom</button>
+                </a>
+            </div>
+            <h1>{{ school.name }}</h1>
         </div>
-        <h2>School District</h2>
-        <h2>Schools</h2>
         <h2>Classrooms</h2>
+        {% for klass in classRooms %}
+            {{ klass }}
+        {% endfor %}
 	</div>
 {% endblock %}

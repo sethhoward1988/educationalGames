@@ -7,10 +7,11 @@ class PublicHome(BaseHandler):
         print "running home get"
         user = users.get_current_user()
         if user:
-            # print user._user_id
+            print user.user_id()
             query = Person.query()
             query.filter(Person.user_id == user.user_id())
             person = query.fetch(1)
+            print person
             # Person exists, check role and send them to the right page
             try:
                 role = person.role
